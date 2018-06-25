@@ -1,0 +1,26 @@
+{
+    "name": "gentoma/module-helpdesk",
+    "description": "Helpdesk service for purchased customers.",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "authors": [
+        {
+            "email": "info@mage2gen.com",
+            "name": "Mage2Gen"
+        },
+        {
+            "email": "thangtt6947@gmail.com",
+            "name": "Th\u1eafng Tr\u1ea7n Th\u1ebf"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Gentoma\\Helpdesk\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}
