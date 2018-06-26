@@ -1,8 +1,21 @@
 <?xml version="1.0" ?>
-<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-	<body>
-		<referenceContainer name="content">
-			<block class="Gentoma\Helpdesk\Block\Index\Index" name="index.index" template="Gentoma_Helpdesk::index/index.phtml"/>
-		</referenceContainer>
-	</body>
+<page layout="2columns-left" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account" />
+
+    <head>
+        <title>Helpdesk Tickets</title>
+        <css src="Gentoma_Helpdesk::css/style.css"/>
+        <link src='Gentoma_Helpdesk::js/script.js' type='text/javascript'/>
+    </head>
+
+    <body>
+        <referenceContainer name="content">
+            <block class="Gentoma\Helpdesk\Block\Index\Index" name="index.index"
+                   template="Gentoma_Helpdesk::index/index.phtml"/>
+        </referenceContainer>
+
+        <referenceBlock name="training.render.first" remove="true"/>
+    </body>
+
 </page>

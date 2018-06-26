@@ -3,25 +3,32 @@
 
 namespace Gentoma\Helpdesk\Block\Index;
 
+use Magento\Framework\View\Element\Template;
+use Gentoma\Helpdesk\Helper\BEM;
+use Gentoma\Helpdesk\Model\Ticket;
+
 class Index extends \Magento\Framework\View\Element\Template
 {
+    public $bem;
 
-    const BEM_BLOCK = 'g-frm_helpdesk--create';
-
-    public function bemGetBlock()
+    public function __construct(Template\Context $context, array $data = [])
     {
-        return self::BEM_BLOCK;
+        $this->bem = new BEM('g-frm_helpdesk', 'send');
+        parent::__construct($context, $data);
     }
 
-    public function bemGetElementClass($element = '', $state = [], $extra = [])
+    public function getStatuses()
     {
-        if (empty($element)) {
-            return '';
-        }
-
-        $class = [self::BEM_BLOCK . '__' . $element];
-
-        return implode(' ', $class);
+        return Ticket::$statuses;
     }
 
+    public function getLeveles()
+    {
+        return Ticket::$leveles;
+    }
+
+    public function getFromAction()
+    {
+        return $this->getUrl('gentoma_helpdesk/index/save');
+    }
 }

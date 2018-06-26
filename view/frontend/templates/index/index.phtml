@@ -6,8 +6,47 @@
  */
 ?>
 
-<form class="<?php echo $block->bemGetBlock(); ?>">
 
-    <div class="<?php echo $block->bemGetElementClass(); ?>"></div>
+<?php
+$form_class = $block->bem->getBlock();
+$field_class = $block->bem->element('field');
+$label_class = $block->bem->element('field__label');
+$input_class = $block->bem->element('field__input');
+$submit_class = $block->bem->element('field__submit');
+?>
+
+
+<form class="<?= $form_class; ?>" method="POST"
+      action="<?= $block->getFromAction() ?>">
+
+
+    <div class="<?= $field_class ?>">
+        <label class="<?= $label_class ?>"><?= __('Title') ?></label>
+
+        <input class="<?= $input_class ?>" type="text"
+               maxlength="255"
+               name="title"
+               data-validate="{required:true}">
+    </div>
+
+    <div class="<?= $field_class ?>">
+        <label class="<?= $label_class ?>"><?= __('Level') ?></label>
+
+        <select class="<?= $input_class ?>" name="level">
+            <?php foreach ($this->getLeveles() as $key => $val): ?>
+                <option value="<?= $key; ?>"><?= $val ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+
+    <div class="<?= $field_class ?>">
+        <?= $block->getBlockHtml('formkey') ?>
+
+        <input class="<?= $submit_class ?>" type="submit"
+               value="<?= __('Send ticket') ?>"
+               name="submit"
+               required>
+    </div>
 
 </form>
+

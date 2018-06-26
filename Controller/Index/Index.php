@@ -3,29 +3,32 @@
 
 namespace Gentoma\Helpdesk\Controller\Index;
 
-class Index extends \Magento\Framework\App\Action\Action
+use Magento\Framework\App\Action\Context;
+use Magento\Customer\Model\Session;
+use Magento\Framework\View\Result\PageFactory;
+
+class Index extends \Gentoma\Helpdesk\Controller\Index
 {
 
     protected $resultPageFactory;
 
     /**
-     * Constructor
+     * Index constructor.
      *
-     * @param \Magento\Framework\App\Action\Context  $context
-     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
+     * @param Context     $context
+     * @param Session     $customerSession
+     * @param PageFactory $resultPageFactory
      */
-    public function __construct(
-        \Magento\Framework\App\Action\Context $context,
-        \Magento\Framework\View\Result\PageFactory $resultPageFactory
+    public function __construct(Context $context, Session $customerSession,
+        PageFactory $resultPageFactory
     ) {
+
         $this->resultPageFactory = $resultPageFactory;
-        parent::__construct($context);
+        parent::__construct($context, $customerSession);
     }
 
     /**
-     * Execute view action
-     *
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface|\Magento\Framework\View\Result\Page
      */
     public function execute()
     {

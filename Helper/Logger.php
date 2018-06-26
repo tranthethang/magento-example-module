@@ -14,10 +14,14 @@ class Logger
         if (empty($message)) {
             return;
         }
-        
-        $writer = new Stream(sprintf(self::PATH, $type));
-        $logger = new Zend_Logger();
-        $logger->addWriter($writer);
-        $logger->info($message);
+
+        try {
+            $writer = new Stream(sprintf(self::PATH, $type));
+            $logger = new Zend_Logger();
+            $logger->addWriter($writer);
+            $logger->info($message);
+        } catch (\Exception $e) {
+            #TODO: Flush errors.
+        }
     }
 }

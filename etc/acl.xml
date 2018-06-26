@@ -4,9 +4,21 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Gentoma_Helpdesk::gentoma_helpdesk" sortOrder="10" title="gentoma helpdesk">
-                    <resource id="Gentoma_Helpdesk::index_index" sortOrder="10" title="index index"/>
+
+                <resource id="Magento_Customer::customer">
+                    <resource id="Gentoma_Helpdesk::gentoma_helpdesk" sortOrder="10" title="gentoma helpdesk">
+                        <resource id="Gentoma_Helpdesk::index_index" sortOrder="10" title="index index"/>
+                    </resource>
                 </resource>
+
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Gentoma_Helpdesk::helpdesk" title="Helpdesk Section"/>
+                        </resource>
+                    </resource>
+                </resource>
+
             </resource>
         </resources>
     </acl>
