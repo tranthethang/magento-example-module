@@ -4,9 +4,7 @@
 
     <body>
         <referenceContainer name="content">
-            <block class="Gentoma\Helpdesk\Block\Adminhtml\Index\Index"
-                   name="index.index"
-                   template="Gentoma_Helpdesk::index/index.phtml"/>
+            <uiComponent name="gentoma_helpdesk_ticket_list"/>
         </referenceContainer>
     </body>
 </page>

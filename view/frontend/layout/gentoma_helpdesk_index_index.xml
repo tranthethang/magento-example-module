@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <page layout="2columns-left" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <update handle="customer_account" />
+    <update handle="customer_account"/>
 
     <head>
         <title>Helpdesk Tickets</title>
@@ -11,11 +11,16 @@
 
     <body>
         <referenceContainer name="content">
-            <block class="Gentoma\Helpdesk\Block\Index\Index" name="index.index"
+
+            <block class="Gentoma\Helpdesk\Block\Index\Index"
+                   name="gentoma.helpdesk.index.index"
                    template="Gentoma_Helpdesk::index/index.phtml"/>
         </referenceContainer>
 
-        <referenceBlock name="training.render.first" remove="true"/>
+        <move element="page.main.title"
+              destination="content"
+              as="gentoma.helpdesk.page.main.title"
+              before="gentoma.helpdesk.index.index"/>
     </body>
 
 </page>

@@ -3,7 +3,6 @@
 
 namespace Gentoma\Helpdesk\Controller\Index;
 
-use Gentoma\Helpdesk\Helper\Logger;
 use Gentoma\Helpdesk\Model\TicketFactory;
 use Gentoma\Helpdesk\Model\ResourceModel\Ticket as ResourceModelTicket;
 use Gentoma\Helpdesk\Model\Ticket;
@@ -14,11 +13,12 @@ use Magento\Framework\View\Result\PageFactory;
 use Magento\Framework\Data\Form\FormKey\Validator;
 use Magento\Framework\Stdlib\DateTime;
 
+use Psr\Log\LoggerInterface;
 
 class Save extends \Gentoma\Helpdesk\Controller\Index
 {
 
-    protected $resultPageFactory, $formKeyValidator, $dateTime, $ticketFactory, $resourceModelTicket;
+    protected $logger, $resultPageFactory, $formKeyValidator, $dateTime, $ticketFactory, $resourceModelTicket;
 
     /**
      * Save constructor.
@@ -37,9 +37,10 @@ class Save extends \Gentoma\Helpdesk\Controller\Index
         Validator $formKeyValidator,
         DateTime $dateTime,
         TicketFactory $ticketFactory,
-        ResourceModelTicket $resourceModelTicket
+        ResourceModelTicket $resourceModelTicket,
+        LoggerInterface $logger
     ) {
-
+        $this->logger = $logger;
         $this->resultPageFactory = $resultPageFactory;
         $this->formKeyValidator = $formKeyValidator;
         $this->dateTime = $dateTime;
@@ -72,6 +73,7 @@ class Save extends \Gentoma\Helpdesk\Controller\Index
             $ticket = $this->ticketFactory->create();
             $ticket->setCustomerId($this->customerSession->getCustomerId());
             $ticket->setTitle($title);
+            $ticket->setLevel($level);
             $ticket->setCreatedAt($this->dateTime->formatDate(true));
             $ticket->setStatus(Ticket::STATUS_OPENED);
 
@@ -81,7 +83,7 @@ class Save extends \Gentoma\Helpdesk\Controller\Index
                 __('Ticket successfully created.')
             );
         } catch (\Exception $e) {
-            Logger::log($e);
+            $this->logger->error($e);
             $this->messageManager->addErrorMessage(
                 __('Error occurred during ticket creation.')
             );

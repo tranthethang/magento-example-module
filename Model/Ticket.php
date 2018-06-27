@@ -32,22 +32,14 @@ class Ticket extends AbstractModel implements TicketInterface
             self::LEVEL_HIGHT  => 'Hight'
         );
 
-    public function getStatusName($statusID = 0)
+    public function getStatusAsText()
     {
-        if (isset(self::$statuses[$statusID])) {
-            return self::$statuses[$statusID];
-        }
-
-        return '';
+        return self::$statuses[$this->getStatus()];
     }
 
-    public function getLevelName($levelID = 0)
+    public function getLevelAsText()
     {
-        if (isset(self::$leveles[$levelID])) {
-            return self::$leveles[$levelID];
-        }
-
-        return '';
+        return self::$leveles[$this->getLevel()];
     }
 
     function getId()

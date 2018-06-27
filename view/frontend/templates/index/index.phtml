@@ -15,7 +15,6 @@ $input_class = $block->bem->element('field__input');
 $submit_class = $block->bem->element('field__submit');
 ?>
 
-
 <form class="<?= $form_class; ?>" method="POST"
       action="<?= $block->getFromAction() ?>">
 
@@ -50,3 +49,31 @@ $submit_class = $block->bem->element('field__submit');
 
 </form>
 
+<?php
+$tickets = $block->getTickets();
+?>
+
+<?php if ($tickets->count()): ?>
+    <table class="data-grid">
+        <thead>
+        <tr>
+            <th><?= __('ID') ?></th>
+            <th><?= __('Title') ?></th>
+            <th><?= __('Created At') ?></th>
+            <th><?= __('Severity') ?></th>
+            <th><?= __('Status') ?></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($tickets as $t): ?>
+            <tr>
+                <td><?= $t->getId() ?></td>
+                <td><?= $block->escapeHtml($t->getTitle()) ?></td>
+                <td><?= $t->getCreatedAt() ?></td>
+                <td><?= $t->getLevelAsText() ?></td>
+                <td><?= $t->getStatusAsText() ?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php endif; ?>
